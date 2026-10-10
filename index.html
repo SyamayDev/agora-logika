@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Agora Logika · Kalkulus Predikat bersama Socrates</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="viewport">
+    <main id="stage" aria-live="polite">
+      <canvas id="bg" width="480" height="270" aria-hidden="true"></canvas>
+      <div id="fx" aria-hidden="true"></div>
+      <div id="world"></div>
+      <div id="dark" hidden></div>
+
+      <!-- Panel notasi (tablet gelap) -->
+      <section id="panel" class="hidden" aria-label="Panel notasi">
+        <header id="panel-title"></header>
+        <div id="panel-body"></div>
+        <div id="panel-foot"></div>
+      </section>
+
+      <!-- HUD atas -->
+      <header id="hud">
+        <button id="btn-map" class="btn btn-hud" data-tip="Peta Athena (M)">Peta</button>
+        <span id="scene-label"></span>
+        <ol id="pipeline" aria-label="Jalur Pipeline">
+          <li class="stone idle"><i></i><span></span></li>
+          <li class="stone idle"><i></i><span></span></li>
+          <li class="stone idle"><i></i><span></span></li>
+          <li class="stone idle"><i></i><span></span></li>
+          <li class="stone idle"><i></i><span></span></li>
+        </ol>
+        <button id="btn-kartu" class="btn btn-hud">Kartu</button>
+        <button id="btn-tas" class="btn btn-hud">Jurus</button>
+      </header>
+
+      <button id="btn-ask" data-tip="Tanya Socrates (A)" aria-label="Tanya Socrates"><canvas id="ask-face"></canvas><span>?</span></button>
+
+      <!-- Kotak dialog -->
+      <div id="dialog">
+        <div id="portrait"></div>
+        <div class="dlg-main">
+          <div id="speaker">Socrates</div>
+          <div id="dlg-text"></div>
+          <div id="choices"></div>
+        </div>
+        <div id="dlg-nav">
+          <button id="btn-prev" class="navbtn" aria-label="Mundur satu langkah" data-tip="Mundur (←)">‹</button>
+          <span id="next-ind"></span>
+          <button id="btn-next" class="navbtn" aria-label="Lanjut" data-tip="Lanjut (Spasi)">›</button>
+        </div>
+      </div>
+
+      <div id="pip-zone" hidden>Zona PiP · wajah presenter</div>
+
+      <!-- Overlay -->
+      <div id="ov-ask" class="overlay side" hidden>
+        <div class="sheet">
+          <h2>Tanya Socrates</h2>
+          <p class="sheet-sub">Pilih pertanyaan. Jawaban muncul di kotak dialog.</p>
+          <div id="ask-list"></div>
+          <button class="btn btn-secondary close">Tutup</button>
+        </div>
+      </div>
+      <div id="ov-kartu" class="overlay" hidden>
+        <div class="sheet wide">
+          <h2>Kartu Argumen</h2>
+          <div id="kartu-cols"></div>
+          <button class="btn btn-secondary close">Tutup</button>
+        </div>
+      </div>
+      <div id="ov-tas" class="overlay" hidden>
+        <div class="sheet wide">
+          <h2>Jurus: aturan inferensi</h2>
+          <div id="tas-cards"></div>
+          <button class="btn btn-secondary close">Tutup</button>
+        </div>
+      </div>
+      <div id="ov-map" class="overlay" hidden>
+        <div class="sheet map">
+          <h2>Peta Athena</h2>
+          <div id="map-area"></div>
+          <button class="btn btn-secondary close">Tutup</button>
+        </div>
+      </div>
+
+      <div id="tooltip" role="tooltip"></div>
+      <div id="toast" role="status"></div>
+      <canvas id="transition" width="1920" height="1080" aria-hidden="true"></canvas>
+    </main>
+  </div>
+
+  <div id="help" hidden>
+    <div class="help-sheet">
+      <h2>Kontrol presenter</h2>
+      <dl>
+        <dt>Spasi / →</dt><dd>Lanjut satu langkah</dd>
+        <dt>←</dt><dd>Mundur satu langkah</dd>
+        <dt>Shift + Spasi</dt><dd>Lewati pertanyaan (tampilkan jawaban benar)</dd>
+        <dt>A</dt><dd>Tanya Socrates</dd>
+        <dt>K</dt><dd>Kartu Argumen</dd>
+        <dt>I</dt><dd>Jurus</dd>
+        <dt>M</dt><dd>Peta Athena</dd>
+        <dt>Home</dt><dd>Ulangi scene ini</dd>
+        <dt>R</dt><dd>Kurangi gerak</dd>
+        <dt>N</dt><dd>Suara hidup / mati</dd>
+        <dt>P</dt><dd>Tampilkan zona PiP</dd>
+        <dt>F</dt><dd>Layar penuh</dd>
+        <dt>H</dt><dd>Bantuan ini</dd>
+      </dl>
+      <p>Tekan H atau Esc untuk menutup.</p>
+    </div>
+  </div>
+
+  <!-- Urutan penting: konten → grafis → mesin → scene → mulai -->
+  <script src="js/content.js"></script>
+  <script src="js/pixel-art.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/scenes.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
